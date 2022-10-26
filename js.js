@@ -1,19 +1,34 @@
+const button= document.getElementById('gridSize');
+const grid = document.getElementById('grid');
 
+button.addEventListener('click', makeGridSize);
 
-for(let i=0; i < 256; i++){
-    var gridItem = document.createElement('div');
-    gridItem.className = 'grid-item';
-    gridItem.id = i;
-    gridItem.textContent = i;
-    document.getElementById('grid').appendChild(gridItem);
+function makeGridSize(){
+    var gridSize = prompt("what Grid size would you like. IE enter 16 for 16x16 grid.");
+    grid.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`
+    grid.style.gridTemplateRows = `repeat(${gridSize}, 100px)`
+    gridSize = gridSize * gridSize;
+
+    for(let i=0; i < gridSize; i++){
+        var gridItem = document.createElement('div');
+        gridItem.className = 'grid-item';
+        gridItem.id = i;
+        gridItem.textContent = i;
+        document.getElementById('grid').appendChild(gridItem);
+    }
+colorGrid()
+    
 }
 
-const gridItems = document.querySelectorAll(".grid-item");
+function colorGrid(){
+    gridItems = document.querySelectorAll(".grid-item");
+    console.log(gridItems);
+    gridItems.forEach((gridItem) => {
+        gridItem.addEventListener('mouseover', callId)
+    });
+}
 
-gridItems.forEach((gridItem) => 
-    gridItem.addEventListener('click', callId));
-   
-    function callId()
-    {
-    this.classList.add('clicked');
-    }
+function callId()
+{
+this.classList.add('clicked');
+}
